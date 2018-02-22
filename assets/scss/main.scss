@@ -1,0 +1,28 @@
+.hero-wrapper{
+	overflow: hidden;
+	height: 100%;
+
+	.hero{
+		width: 200%;
+		top: 0;
+		left: 0;
+		display: flex;
+
+		&.transitioning{
+			transition: 0.6s all ease;
+		}
+
+		&__slide{
+			width: 100vw;
+			height: 100%;
+
+			&--1{
+				background-image: url('../images/sunset.jpg');
+			}
+
+			&--2{
+				background-image: url('../images/bridge.jpg');
+			}
+		}
+	}
+}
