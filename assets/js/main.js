@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var win_width = $(window).width();
 
 	var shiftValues = [0.4, 0.2, 0.1, -0.24, -0.4];
+	var shiftValue_winRatio = [];
 	var supaScroll = false;
 	var startingX;
 	var currentIndex = 1;
@@ -10,12 +11,22 @@ $(document).ready(function(){
 	get_max_shift();
 
 	function get_max_shift(){
+		shift_browser_ratio();
+
+		console.log(shiftValue_winRatio);
+
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
-			var max_shift = ( win_width * shiftValues[$(this).index()] ) * slide_index;
+			var max_shift = shiftValue_winRatio[ $(this).index() ] * slide_index;
 			
 			$(this).find('div').attr('data-max-shift', max_shift).css('left','' + max_shift + 'px');
 		})
+	}
+
+	function shift_browser_ratio(){
+		for (i = 0; i < shiftValues.length; ++i) {
+    		shiftValue_winRatio.push( win_width * shiftValues[i] );
+		}
 	}
 
 	$(document).on('mousedown touchstart', '.can-transition', function(e){
@@ -97,24 +108,13 @@ $(document).ready(function(){
 	}
 
 	function background_shift(diffX){
-		$('.background').each(function(){
-			if ( $(this).parent().index() != 0 ) {
-				var background_offset = ( $(this).attr('data-slide-offset') - ( ( diffX * 0.08) * -1 ) );
-				background_offset -= $(this).attr('data-slide-offset') * ( currentIndex - 1 ); 
-
-				$(this).css('transform','translateX(-' + background_offset + 'px)');
-			}
-		})
-
 		$('.background__segment').each(function(){
 			var index = $(this).index();
 			var current_shift_val = $(this).find('div').attr('data-max-shift');
+			var new_offset = ( shiftValue_winRatio[index] * ( diffX / win_width ) ) + ( shiftValue_winRatio[index] * ( currentIndex - 1 ) ) 
 
-			var new_offset = ( parseInt(current_shift_val) + ( diffX * shiftValues[index] ) );
-
-			$(this).find('div').css('left','' + ( new_offset - ( parseInt(current_shift_val) * ( currentIndex - 1 ) ) ) + 'px');
+			$(this).find('div').css('left','' + ( current_shift_val - new_offset ) + 'px');
 		})
-
 	}
 
 	function q(o){$(".js-typer").append(e[o]),o<e.length-1&&setTimeout(function(){q(o+1)},"."==e[o]?1e3:80)}e="Hey, It's me.".split(''),q(0)
