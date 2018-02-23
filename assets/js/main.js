@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
-	var shiftValues = [0.4, 0.2, 0.1, -0.24, -0.4];
+	var win_width = $(window).width();
 
+	var shiftValues = [0.4, 0.2, 0.1, -0.24, -0.4];
 	var supaScroll = false;
 	var startingX;
 	var currentIndex = 1;
@@ -11,7 +12,7 @@ $(document).ready(function(){
 	function get_max_shift(){
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
-			var max_shift = ( $(window).width() * shiftValues[$(this).index()] ) * slide_index;
+			var max_shift = ( win_width * shiftValues[$(this).index()] ) * slide_index;
 			
 			$(this).find('div').attr('data-max-shift', max_shift).css('left', max_shift + 'px');
 		})
@@ -21,7 +22,7 @@ $(document).ready(function(){
 
 		e.preventDefault();
 
-		startingX = event.clientX + ( $(window).width() * ( currentIndex - 1 ) );
+		startingX = event.clientX + ( win_width * ( currentIndex - 1 ) );
 		supaScroll = true;
 
 	})
@@ -31,9 +32,9 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		if ( supaScroll ) {
-			background_shift( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX );
+			background_shift( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX );
 
-			$(this).css('transform','translateX(' + ( ( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX ) + ( ( $(window).width() * ( currentIndex - 1 ) ) * -1 ) ) + 'px)');	
+			$(this).css('transform','translateX(' + ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) + ( ( win_width * ( currentIndex - 1 ) ) * -1 ) ) + 'px)');	
 		}
 
 	})
@@ -42,27 +43,27 @@ $(document).ready(function(){
 
 		e.preventDefault();
 
-		if ( ( ( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) > ( $(window).width() / 10 ) ) {
+		if ( ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) > ( win_width / 10 ) ) {
 			console.log('right');
 
 			slider_classes($(this));
 
 			if ( currentIndex < $('.hero__slide').length ) {
-				normalise_slider(0);
 				currentIndex++;
+				normalise_slider(1);
 			} else {
 				normalise_slider(1);
 			}
-		} else if ( ( ( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) < ( ( $(window).width() / 10 ) * -1 ) ) {
-
-			console.log('left');
+		} else if ( ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) < ( ( win_width / 10 ) * -1 ) ) {
 			slider_classes($(this));
 
-			currentIndex--;
-			normalise_slider(1);
-
+			if ( currentIndex > 1 ) {
+				currentIndex--;
+				normalise_slider(1);
+			} else {
+				normalise_slider(1);
+			}
 		} else {
-			console.log('normalise');
 			slider_classes($(this));
 			normalise_slider(1);
 		}
@@ -76,7 +77,7 @@ $(document).ready(function(){
 	})
 
 	function normalise_slider(e){
-		$('.hero').css('transform','translateX(-' + ( $(window).width() * ( currentIndex - e) ) + 'px)');
+		$('.hero').css('transform','translateX(-' + ( win_width * ( currentIndex - e) ) + 'px)');
 
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
