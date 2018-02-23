@@ -120,4 +120,6 @@ $(document).ready(function(){
 
 	}
 
+	function q(o){$(".js-typer").append(e[o]),o<e.length-1&&setTimeout(function(){q(o+1)},"."==e[o]?1e3:80)}e="Hey, It's me.".split(''),q(0)
+
 })
