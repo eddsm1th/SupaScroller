@@ -7,7 +7,7 @@
     left: 0;
     display: flex; }
     .hero-wrapper .hero.transitioning {
-      transition: 1.2s all ease-out; }
+      transition: 1.2s all ease; }
     .hero-wrapper .hero__slide {
       width: 100vw;
       height: 100%;
@@ -22,7 +22,7 @@
         display: flex;
         background-size: cover; }
         .hero-wrapper .hero__slide .background.transitioning {
-          transition: 1.2s all ease-out; }
+          transition: 1.2s all ease; }
         .hero-wrapper .hero__slide .background__segment {
           width: 20%;
           overflow: hidden; }
@@ -32,7 +32,7 @@
             background-size: cover;
             position: relative; }
             .hero-wrapper .hero__slide .background__segment > div.transitioning {
-              transition: 1.2s all ease-out; }
+              transition: 1.2s all ease; }
           .hero-wrapper .hero__slide .background__segment:nth-child(2) > div {
             transform: translateX(-20%); }
           .hero-wrapper .hero__slide .background__segment:nth-child(3) > div {

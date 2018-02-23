@@ -7,13 +7,12 @@ $(document).ready(function(){
 	var supaScroll = false;
 	var startingX;
 	var currentIndex = 1;
+	var last_scroll_top = 0;
 
 	get_max_shift();
 
 	function get_max_shift(){
 		shift_browser_ratio();
-
-		console.log(shiftValue_winRatio);
 
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
@@ -116,6 +115,44 @@ $(document).ready(function(){
 			$(this).find('div').css('left','' + ( current_shift_val - new_offset ) + 'px');
 		})
 	}
+
+	$(document).scroll(function(){
+		console.log('hello?');
+	})
+
+	var scrollAmount = 0;
+
+	document.addEventListener('wheel', function(e){
+		var scrollCompare = scrollAmount;
+
+		scrollAmount += e.deltaY;
+
+		if ( $('.hero').hasClass('can-transition') ) {
+			if ( scrollAmount > scrollCompare) {
+				if ( currentIndex < $('.hero__slide').length ) {
+					currentIndex++;
+					normalise_slider(1);
+					slider_classes($('.hero'));
+					
+					setTimeout(function(){
+						$('.hero').addClass('can-transition').removeClass('transitioning');
+					}, 1200)
+				}
+			} else {
+				if ( currentIndex > 1 ) {
+					currentIndex--;
+					normalise_slider(1);
+					slider_classes($('.hero'));
+
+					setTimeout(function(){
+						$('.hero').addClass('can-transition').removeClass('transitioning');
+					}, 1200)
+				}
+			}
+
+			
+		}
+	})
 
 	function q(o){$(".js-typer").append(e[o]),o<e.length-1&&setTimeout(function(){q(o+1)},"."==e[o]?1e3:80)}e="Hey, It's me.".split(''),q(0)
 
