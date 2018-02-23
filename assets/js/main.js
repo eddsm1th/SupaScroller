@@ -14,7 +14,7 @@ $(document).ready(function(){
 			var slide_index = $(this).parent().parent().index();
 			var max_shift = ( win_width * shiftValues[$(this).index()] ) * slide_index;
 			
-			$(this).find('div').attr('data-max-shift', max_shift).css('left', max_shift + 'px');
+			$(this).find('div').attr('data-max-shift', max_shift).css('left','0px');
 		})
 	}
 
