@@ -44,8 +44,6 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		if ( ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) > ( win_width / 10 ) ) {
-			console.log('right');
-
 			slider_classes($(this));
 
 			if ( currentIndex < $('.hero__slide').length ) {
@@ -82,7 +80,6 @@ $(document).ready(function(){
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
 			var multiplier = ( slide_index + 1 ) - currentIndex;
-			console.log(multiplier);
 			var index = $(this).index();
 
 			var segment_shift = ( $(this).find('div').attr('data-max-shift') * multiplier );
