@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var shiftValues = [0.20, 0.12, 0.01, -0.24, -0.34];
+	var shiftValues = [0.4, 0.2, 0.1, -0.24, -0.4];
 
 	var supaScroll = false;
 	var startingX;
@@ -14,8 +14,6 @@ $(document).ready(function(){
 			var max_shift = ( $(window).width() * shiftValues[$(this).index()] ) * slide_index;
 			
 			$(this).find('div').attr('data-max-shift', max_shift).css('left', max_shift + 'px');
-
-			$(this).parent().attr('data-slide-offset', ( ( $(window).width() * 0.2 ) * slide_index )).css('transform','translateX(-' + ( ( $(window).width() * 0.2 ) * slide_index ) + 'px)')
 		})
 	}
 
@@ -23,7 +21,7 @@ $(document).ready(function(){
 
 		e.preventDefault();
 
-		startingX = event.clientX;
+		startingX = event.clientX + ( $(window).width() * ( currentIndex - 1 ) );
 		supaScroll = true;
 
 	})
@@ -33,9 +31,9 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		if ( supaScroll ) {
-			background_shift(event.clientX - startingX);
+			background_shift( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX );
 
-			$(this).css('transform','translateX(' + ( ( event.clientX - startingX ) + ( ( $(window).width() * ( currentIndex - 1 ) ) * -1 ) ) + 'px)');	
+			$(this).css('transform','translateX(' + ( ( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX ) + ( ( $(window).width() * ( currentIndex - 1 ) ) * -1 ) ) + 'px)');	
 		}
 
 	})
@@ -44,7 +42,9 @@ $(document).ready(function(){
 
 		e.preventDefault();
 
-		if ( ( ( event.clientX - startingX ) * -1 ) > ( $(window).width() / 10 ) ) {
+		if ( ( ( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) > ( $(window).width() / 10 ) ) {
+			console.log('right');
+
 			slider_classes($(this));
 
 			if ( currentIndex < $('.hero__slide').length ) {
@@ -53,16 +53,16 @@ $(document).ready(function(){
 			} else {
 				normalise_slider(1);
 			}
-		} else if ( ( ( event.clientX - startingX ) * -1 ) < ( ( $(window).width() / 10 ) * -1 ) ) {
+		} else if ( ( ( ( event.clientX + ( $(window).width() * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) < ( ( $(window).width() / 10 ) * -1 ) ) {
+
+			console.log('left');
 			slider_classes($(this));
 
-			if ( currentIndex > 1 ) {
-				normalise_slider(2);
-				currentIndex--;
-			} else {
-				normalise_slider(1);
-			}
+			currentIndex--;
+			normalise_slider(1);
+
 		} else {
+			console.log('normalise');
 			slider_classes($(this));
 			normalise_slider(1);
 		}
@@ -71,7 +71,7 @@ $(document).ready(function(){
 
 		setTimeout(function(){
 			$('.hero').addClass('can-transition').removeClass('transitioning');			
-		}, 600)
+		}, 1200)
 
 	})
 
@@ -83,21 +83,14 @@ $(document).ready(function(){
 			var multiplier = slide_index - currentIndex;
 			var index = $(this).index();
 
-			$(this).find('div').addClass('transitioning').css('left', ( $(this).find('div').attr('data-max-shift') * multiplier ) + 'px' );
+			var segment_shift = ( $(this).find('div').attr('data-max-shift') * multiplier );
+			segment_shift += $(this).find('div').attr('data-max-shift') * ( currentIndex - 1 );
+
+			$(this).find('div').addClass('transitioning').css('left', segment_shift + 'px' );
 
 			setTimeout(function(){
 				$('.background__segment > div').each(function(){ $(this).removeClass('transitioning'); })
-			}, 600)
-		})
-
-		$('.background').each(function(){
-			if ( $(this).parent().index() != 0 ) {
-				$(this).addClass('transitioning').css('transform','translateX(-' + ( $(this).attr('data-slide-offset') - ( ( $(window).width() * 0.2 ) * currentIndex ) ) + 'px)');
-			}
-
-			setTimeout(function(){
-				$('.background').each(function(){ $(this).removeClass('transitioning'); })
-			}, 600)
+			}, 1200)
 		})
 	}
 
@@ -108,7 +101,10 @@ $(document).ready(function(){
 	function background_shift(diffX){
 		$('.background').each(function(){
 			if ( $(this).parent().index() != 0 ) {
-				$(this).css('transform','translateX(-' + ( $(this).attr('data-slide-offset') - ( ( diffX * 0.08) * -1 ) ) + 'px)');
+				var background_offset = ( $(this).attr('data-slide-offset') - ( ( diffX * 0.08) * -1 ) );
+				background_offset -= $(this).attr('data-slide-offset') * ( currentIndex - 1 ); 
+
+				$(this).css('transform','translateX(-' + background_offset + 'px)');
 			}
 		})
 
@@ -116,10 +112,9 @@ $(document).ready(function(){
 			var index = $(this).index();
 			var current_shift_val = $(this).find('div').attr('data-max-shift');
 
-			var new_offset = parseInt(current_shift_val) + ( diffX * shiftValues[index] );
-			console.log(new_offset);
+			var new_offset = ( parseInt(current_shift_val) + ( diffX * shiftValues[index] ) );
 
-			$(this).find('div').css('left','' + new_offset + 'px');
+			$(this).find('div').css('left','' + ( new_offset - ( parseInt(current_shift_val) * ( currentIndex - 1 ) ) ) + 'px');
 		})
 
 	}

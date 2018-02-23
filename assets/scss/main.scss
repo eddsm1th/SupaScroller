@@ -9,7 +9,7 @@
 		display: flex;
 
 		&.transitioning{
-			transition: 0.6s all ease;
+			transition: 1.2s all ease-out;
 		}
 
 		&__slide{
@@ -25,9 +25,10 @@
 				width: 100%;
 				height: 100%;
 				display: flex;
+				background-size: cover;
 
 				&.transitioning{
-					transition: 0.6s all ease;
+					transition: 1.2s all ease-out;
 				}
 
 				&__segment{
@@ -41,7 +42,7 @@
 						position: relative;
 
 						&.transitioning{
-							transition: 0.6s all ease;
+							transition: 1.2s all ease-out;
 						}
 					}
 
