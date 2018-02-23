@@ -14,7 +14,7 @@ $(document).ready(function(){
 			var slide_index = $(this).parent().parent().index();
 			var max_shift = ( win_width * shiftValues[$(this).index()] ) * slide_index;
 			
-			$(this).find('div').attr('data-max-shift', max_shift).css('left','0px');
+			$(this).find('div').attr('data-max-shift', max_shift).css('left','' + max_shift + 'px');
 		})
 	}
 
@@ -81,11 +81,11 @@ $(document).ready(function(){
 
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
-			var multiplier = slide_index - currentIndex;
+			var multiplier = ( slide_index + 1 ) - currentIndex;
+			console.log(multiplier);
 			var index = $(this).index();
 
 			var segment_shift = ( $(this).find('div').attr('data-max-shift') * multiplier );
-			segment_shift += $(this).find('div').attr('data-max-shift') * ( currentIndex - 1 );
 
 			$(this).find('div').addClass('transitioning').css('left', segment_shift + 'px' );
 
