@@ -96,4 +96,7 @@ p + h3 {
     .section-wrap {
       padding: 0 0; } }
 
+.can-transition {
+  cursor: pointer; }
+
 /*# sourceMappingURL=boop.css.map */
