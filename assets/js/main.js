@@ -1,13 +1,11 @@
 $(document).ready(function(){
 
 	var win_width = $(window).width();
-
-	var shiftValues = [0.4, 0.2, 0.1, -0.24, -0.4];
+	var shiftValues = [0.7, 0.4, 0.1, -0.3, -0.6];
 	var shiftValue_winRatio = [];
 	var supaScroll = false;
 	var startingX;
 	var currentIndex = 1;
-	var last_scroll_top = 0;
 
 	get_max_shift();
 
@@ -16,9 +14,10 @@ $(document).ready(function(){
 
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
-			var max_shift = shiftValue_winRatio[ $(this).index() ] * slide_index;
+			var starting_shift = shiftValue_winRatio[ $(this).index() ] * slide_index;
+			var max_shift = shiftValue_winRatio[ $(this).index() ];
 			
-			$(this).find('div').attr('data-max-shift', max_shift).css('left','' + max_shift + 'px');
+			$(this).find('div').attr('data-max-shift', max_shift).css('left','' + starting_shift + 'px');
 		})
 	}
 
@@ -108,17 +107,15 @@ $(document).ready(function(){
 
 	function background_shift(diffX){
 		$('.background__segment').each(function(){
+			var slide_index = $(this).parent().parent().index();
+			var multiplier = ( slide_index + 1 ) - currentIndex;
+
 			var index = $(this).index();
 			var current_shift_val = $(this).find('div').attr('data-max-shift');
-			var new_offset = ( shiftValue_winRatio[index] * ( diffX / win_width ) ) + ( shiftValue_winRatio[index] * ( currentIndex - 1 ) ) 
 
-			$(this).find('div').css('left','' + ( current_shift_val - new_offset ) + 'px');
+			$(this).find('div').css('left','' + ( ( shiftValue_winRatio[index] * ( diffX / win_width ) ) + ( current_shift_val * multiplier ) ) + 'px');
 		})
 	}
-
-	$(document).scroll(function(){
-		console.log('hello?');
-	})
 
 	var scrollAmount = 0;
 
@@ -130,30 +127,25 @@ $(document).ready(function(){
 		if ( $('.hero').hasClass('can-transition') ) {
 			if ( scrollAmount > scrollCompare) {
 				if ( currentIndex < $('.hero__slide').length ) {
-					currentIndex++;
-					normalise_slider(1);
-					slider_classes($('.hero'));
-					
-					setTimeout(function(){
-						$('.hero').addClass('can-transition').removeClass('transitioning');
-					}, 1200)
+					scroll_wheel_shift(1);
 				}
 			} else {
 				if ( currentIndex > 1 ) {
-					currentIndex--;
-					normalise_slider(1);
-					slider_classes($('.hero'));
-
-					setTimeout(function(){
-						$('.hero').addClass('can-transition').removeClass('transitioning');
-					}, 1200)
+					scroll_wheel_shift(-1)
 				}
 			}
-
-			
 		}
 	})
 
-	function q(o){$(".js-typer").append(e[o]),o<e.length-1&&setTimeout(function(){q(o+1)},"."==e[o]?1e3:80)}e="Hey, It's me.".split(''),q(0)
+	function scroll_wheel_shift(e){
+		currentIndex += e;
+		normalise_slider(1);
+		slider_classes($('.hero'));
 
+		setTimeout(function(){
+			$('.hero').addClass('can-transition').removeClass('transitioning');
+		}, 1200)
+	}
+
+	function q(o){$(".js-typer").append(e[o]),o<e.length-1&&setTimeout(function(){q(o+1)},"."==e[o]?1e3:80)}e="Hey, It's me.".split(''),q(0)
 })
