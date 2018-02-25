@@ -53,27 +53,17 @@ $(document).ready(function(){
 		e.preventDefault();
 
 		if ( ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) > ( win_width / 10 ) ) {
-			slider_classes($(this));
-
 			if ( currentIndex < $('.hero__slide').length ) {
 				currentIndex++;
-				normalise_slider(1);
-			} else {
-				normalise_slider(1);
 			}
 		} else if ( ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * -1 ) < ( ( win_width / 10 ) * -1 ) ) {
-			slider_classes($(this));
-
 			if ( currentIndex > 1 ) {
 				currentIndex--;
-				normalise_slider(1);
-			} else {
-				normalise_slider(1);
 			}
-		} else {
-			slider_classes($(this));
-			normalise_slider(1);
 		}
+
+		slider_classes($(this));
+		normalise_slider();
 
 		supaScroll = false;
 
@@ -83,8 +73,8 @@ $(document).ready(function(){
 
 	})
 
-	function normalise_slider(e){
-		$('.hero').css('transform','translateX(-' + ( win_width * ( currentIndex - e) ) + 'px)');
+	function normalise_slider(){
+		$('.hero').css('transform','translateX(-' + ( win_width * ( currentIndex - 1) ) + 'px)');
 
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
@@ -139,7 +129,7 @@ $(document).ready(function(){
 
 	function scroll_wheel_shift(e){
 		currentIndex += e;
-		normalise_slider(1);
+		normalise_slider();
 		slider_classes($('.hero'));
 
 		setTimeout(function(){
