@@ -2,12 +2,15 @@ $(document).ready(function(){
 
 	var win_width = $(window).width();
 	var shiftValues = [0.7, 0.4, 0.1, -0.3, -0.6];
-	var shiftValue_winRatio = [];
+	var shiftValue_winRatio;
 	var supaScroll = false;
 	var startingX;
 	var currentIndex = 1;
+	var scrollAmount = 0;
 
 	get_max_shift();
+
+	$(window).resize(function(){ get_max_shift(); })
 
 	function get_max_shift(){
 		shift_browser_ratio();
@@ -22,6 +25,8 @@ $(document).ready(function(){
 	}
 
 	function shift_browser_ratio(){
+		shiftValue_winRatio = [];
+
 		for (i = 0; i < shiftValues.length; ++i) {
     		shiftValue_winRatio.push( win_width * shiftValues[i] );
 		}
@@ -64,13 +69,7 @@ $(document).ready(function(){
 
 		slider_classes($(this));
 		normalise_slider();
-
 		supaScroll = false;
-
-		setTimeout(function(){
-			$('.hero').addClass('can-transition').removeClass('transitioning');			
-		}, 1200)
-
 	})
 
 	function normalise_slider(){
@@ -80,7 +79,6 @@ $(document).ready(function(){
 			var slide_index = $(this).parent().parent().index();
 			var multiplier = ( slide_index + 1 ) - currentIndex;
 			var index = $(this).index();
-
 			var segment_shift = ( $(this).find('div').attr('data-max-shift') * multiplier );
 
 			$(this).find('div').addClass('transitioning').css('left', segment_shift + 'px' );
@@ -93,13 +91,16 @@ $(document).ready(function(){
 
 	function slider_classes(e){
 		e.removeClass('can-transition').addClass('transitioning');
+
+		setTimeout(function(){
+			e.addClass('can-transition').removeClass('transitioning');			
+		}, 1200)
 	}
 
 	function background_shift(diffX){
 		$('.background__segment').each(function(){
 			var slide_index = $(this).parent().parent().index();
 			var multiplier = ( slide_index + 1 ) - currentIndex;
-
 			var index = $(this).index();
 			var current_shift_val = $(this).find('div').attr('data-max-shift');
 
@@ -107,22 +108,15 @@ $(document).ready(function(){
 		})
 	}
 
-	var scrollAmount = 0;
-
 	document.addEventListener('wheel', function(e){
 		var scrollCompare = scrollAmount;
-
 		scrollAmount += e.deltaY;
 
 		if ( $('.hero').hasClass('can-transition') ) {
-			if ( scrollAmount > scrollCompare) {
-				if ( currentIndex < $('.hero__slide').length ) {
-					scroll_wheel_shift(1);
-				}
-			} else {
-				if ( currentIndex > 1 ) {
-					scroll_wheel_shift(-1)
-				}
+			if ( scrollAmount > scrollCompare && currentIndex < $('.hero__slide').length ) {
+				scroll_wheel_shift(1);
+			} else if ( currentIndex > 1 ) {
+				scroll_wheel_shift(-1)
 			}
 		}
 	})
@@ -131,11 +125,5 @@ $(document).ready(function(){
 		currentIndex += e;
 		normalise_slider();
 		slider_classes($('.hero'));
-
-		setTimeout(function(){
-			$('.hero').addClass('can-transition').removeClass('transitioning');
-		}, 1200)
 	}
-
-	function q(o){$(".js-typer").append(e[o]),o<e.length-1&&setTimeout(function(){q(o+1)},"."==e[o]?1e3:80)}e="Hey, It's me.".split(''),q(0)
 })
