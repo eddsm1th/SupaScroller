@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-	var win_width = $(window).width();
+	var win_width;
 	var shiftValues = [0.7, 0.4, 0.1, -0.3, -0.6];
 	var shiftValue_winRatio;
 	var supaScroll = false;
@@ -25,6 +25,7 @@ $(document).ready(function(){
 	}
 
 	function shift_browser_ratio(){
+		win_width = $(window).width();
 		shiftValue_winRatio = [];
 
 		for (i = 0; i < shiftValues.length; ++i) {
