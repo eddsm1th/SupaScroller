@@ -5,12 +5,14 @@
 	font-family: helvetica;
 }
 
-html, body{
-	overflow: hidden;
-}
-
 body{
 	background: #000;
+	overflow: hidden;
+
+	&.content-active{
+		overflow: visible;
+		overflow-x: hidden;
+	}
 }
 
 a{
@@ -155,7 +157,7 @@ p + h3{
 	display: flex;
 
 	@media(max-width: 1024px){
-		padding: 0 0;
+		padding: 0 1rem;
 	}
 }
 

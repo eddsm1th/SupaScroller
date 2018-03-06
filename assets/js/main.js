@@ -1,5 +1,32 @@
 $(document).ready(function(){
 
+
+	$('.learn-more').click(function(e){
+		$('body').addClass('content-active');
+		$('.hero-wrapper').toggleClass('active');
+		$('.hero').removeClass('can-transition');
+		$('.content__section:nth-child(' + ( currentIndex ) + ')').addClass('active');
+	})
+
+	$('.back').click(function(){
+		$('html, body').animate({
+	        scrollTop: $(".hero").offset().top
+	    }, 600);
+	    $('body').removeClass('content-active');
+		$('.hero-wrapper').toggleClass('active');
+
+		setTimeout(function(){
+			$('.content__section').removeClass('active');
+			$('.hero').addClass('can-transition');
+			$('.hero__slide').removeClass('hidden');
+		}, 600)
+	})
+
+
+
+
+
+
 	var win_width;
 	var shiftValues = [0.7, 0.4, 0.1, -0.3, -0.6];
 	var shiftValue_winRatio;
@@ -102,7 +129,11 @@ $(document).ready(function(){
 		e.removeClass('can-transition').addClass('transitioning');
 
 		setTimeout(function(){
-			e.addClass('can-transition').removeClass('transitioning');			
+			if ( $('.hero-wrapper').hasClass('active') ) {
+				e.removeClass('transitioning');
+			} else {
+				e.addClass('can-transition').removeClass('transitioning');
+			}
 		}, 1200)
 	}
 
@@ -118,6 +149,10 @@ $(document).ready(function(){
 	}
 
 	document.addEventListener('wheel', function(e){
+		if ( !$('body').hasClass('content-active') ) {
+			e.preventDefault();
+		}
+		
 		var scrollCompare = scrollAmount;
 		scrollAmount += e.deltaY;
 
@@ -135,4 +170,8 @@ $(document).ready(function(){
 		normalise_slider();
 		slider_classes($('.hero'));
 	}
+
+
+
+
 })
