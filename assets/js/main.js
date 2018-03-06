@@ -33,7 +33,7 @@ $(document).ready(function(){
 		}
 	}
 
-	$(document).on('mousedown touchstart', '.can-transition', function(e){
+	$(document).on('mousedown touchstart', '.hero.can-transition', function(e){
 
 		e.preventDefault();
 
@@ -42,19 +42,34 @@ $(document).ready(function(){
 
 	})
 
-	$(document).on('mousemove touchmove', '.can-transition', function(e){
+	$(document).on('mousemove touchmove', '.hero.can-transition', function(e){
 
 		e.preventDefault();
 		
 		if ( supaScroll ) {
-			background_shift( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX );
 
-			$(this).css('transform','translateX(' + ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) + ( ( win_width * ( currentIndex - 1 ) ) * -1 ) ) + 'px)');	
+			console.log('clientX:\t\t' + ( event.clientX + ( win_width * ( $('.hero__slide').length - 1 ) ) ) + '\nStartingX:\t\t' + startingX);
+
+			if ( ( currentIndex == 1 && event.clientX > startingX ) || ( currentIndex == $('.hero__slide').length && ( event.clientX + ( win_width * ( $('.hero__slide').length - 1 ) ) ) < startingX ) ) {
+
+				$(this).css('transform','translateX(' + get_drag_transform(0.15) + 'px)');
+				background_shift( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * 0.15 );
+
+			} else {
+
+				$(this).css('transform','translateX(' + get_drag_transform(1) + 'px)');
+				background_shift( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX );
+				
+			}
 		}
 
 	})
 
-	$(document).on('mouseup touchend', '.can-transition', function(e){
+	function get_drag_transform(e){
+		return ( ( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * e ) + ( ( win_width * ( currentIndex - 1 ) ) * -1 ) );
+	}
+
+	$(document).on('mouseup touchend', '.hero.can-transition', function(e){
 
 		e.preventDefault();
 
@@ -116,7 +131,7 @@ $(document).ready(function(){
 		if ( $('.hero').hasClass('can-transition') ) {
 			if ( scrollAmount > scrollCompare && currentIndex < $('.hero__slide').length ) {
 				scroll_wheel_shift(1);
-			} else if ( currentIndex > 1 ) {
+			} else if ( scrollAmount < scrollCompare && currentIndex > 1 ) {
 				scroll_wheel_shift(-1)
 			}
 		}
