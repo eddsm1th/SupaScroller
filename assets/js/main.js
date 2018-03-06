@@ -47,19 +47,12 @@ $(document).ready(function(){
 		e.preventDefault();
 		
 		if ( supaScroll ) {
-
-			console.log('clientX:\t\t' + ( event.clientX + ( win_width * ( $('.hero__slide').length - 1 ) ) ) + '\nStartingX:\t\t' + startingX);
-
 			if ( ( currentIndex == 1 && event.clientX > startingX ) || ( currentIndex == $('.hero__slide').length && ( event.clientX + ( win_width * ( $('.hero__slide').length - 1 ) ) ) < startingX ) ) {
-
 				$(this).css('transform','translateX(' + get_drag_transform(0.15) + 'px)');
 				background_shift( ( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX ) * 0.15 );
-
 			} else {
-
 				$(this).css('transform','translateX(' + get_drag_transform(1) + 'px)');
 				background_shift( ( event.clientX + ( win_width * ( currentIndex - 1 ) ) ) - startingX );
-				
 			}
 		}
 
