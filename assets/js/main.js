@@ -164,5 +164,11 @@ $(document).ready(function(){
 			$('.hero__slide').removeClass('hidden');
 		}, 600)
 	})
-
+	
 })
+
+
+
+
+
+
