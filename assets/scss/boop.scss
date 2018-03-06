@@ -6,8 +6,10 @@
 }
 
 body{
+	text-rendering: geometricPrecision; 
 	background: #000;
 	overflow: hidden;
+
 
 	&.content-active{
 		overflow: visible;
