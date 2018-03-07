@@ -12,6 +12,10 @@ $(document).ready(function(){
 
 	$(window).resize(function(){ get_max_shift(); })
 
+	setTimeout(function(){
+		$('.hero').addClass('can-transition');
+	}, 3000)
+
 	function get_max_shift(){
 		shift_browser_ratio();
 
