@@ -35,6 +35,19 @@ $(document).ready(function(){
 		for (i = 0; i < shiftValues.length; ++i) {
     		shiftValue_winRatio.push( win_width * shiftValues[i] );
 		}
+
+		text_offsetting();
+	}
+
+	function text_offsetting(){
+		var side_diff = ( ( ( ( win_width - 1200 ) / 2 ) + 32 ) + ( win_width * 0.035 ) );
+
+		$('.content__title').each(function(){
+			var slide_index = $(this).parent().parent().parent().index();
+			var max_offset = side_diff * slide_index;
+
+			$(this).attr('data-max-offset', side_diff).css('transform','translateX(' + ( max_offset * -1 ) + 'px)');			
+		})
 	}
 
 	$(document).on('mousedown touchstart', '.hero.can-transition', function(e){
@@ -100,6 +113,19 @@ $(document).ready(function(){
 				$('.background__segment > div').each(function(){ $(this).removeClass('transitioning'); })
 			}, 1200)
 		})
+
+		$('.content__title').each(function(){
+			console.log('hello there');
+			var slide_index = $(this).parent().parent().parent().index();
+			var multiplier = ( slide_index + 1 ) - currentIndex;
+			var segment_shift = ( $(this).attr('data-max-offset') * multiplier );
+
+			$(this).addClass('transitioning').css('transform','translateX(' + ( segment_shift * -1 ) + 'px)')
+
+			setTimeout(function(){
+				$('.content__title').each(function(){ $(this).removeClass('transitioning'); })
+			}, 1200)
+		})
 	}
 
 	function slider_classes(e){
@@ -122,6 +148,15 @@ $(document).ready(function(){
 			var current_shift_val = $(this).find('div').attr('data-max-shift');
 
 			$(this).find('div').css('left','' + ( ( shiftValue_winRatio[index] * ( diffX / win_width ) ) + ( current_shift_val * multiplier ) ) + 'px');
+		})
+
+		$('.content__title').each(function(){
+			var slide_index = $(this).parent().parent().parent().index();
+			var multiplier = ( slide_index + 1 ) - currentIndex;
+			var current_shift_val = $(this).attr('data-max-offset');
+
+			$(this).css('transform','translateX(' + ( ( ( current_shift_val * ( diffX / win_width ) ) + ( current_shift_val * multiplier ) ) * -1 ) + 'px)')
+
 		})
 	}
 

@@ -105,6 +105,10 @@
 					height: 50vh;
 					display: flex;
 					align-items: center;
+
+					&.transitioning {
+						transition: 1.2s all ease;
+					}
 				}
 			}
 
