@@ -169,6 +169,7 @@ $(document).ready(function(){
 		scrollAmount += e.deltaY;
 
 		if ( $('.hero').hasClass('can-transition') ) {
+			console.log('true');
 			if ( scrollAmount > scrollCompare && currentIndex < $('.hero__slide').length ) {
 				scroll_wheel_shift(1);
 			} else if ( scrollAmount < scrollCompare && currentIndex > 1 ) {
@@ -205,9 +206,3 @@ $(document).ready(function(){
 	})
 	
 })
-
-
-
-
-
-

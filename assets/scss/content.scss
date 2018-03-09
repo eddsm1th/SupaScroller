@@ -4,6 +4,7 @@
 	z-index: 1;
 
 	&__section{
+		padding-bottom: 8rem;
 		display: none;
 
 		&.active{
@@ -36,6 +37,14 @@
 				line-height: 1;
 				display: flex;
 				align-items: center;
+
+				@media(max-width: 1024px){
+					font-size: 100px;
+				}
+
+				@media(max-width: 768px){
+					font-size: 90px;
+				}
 			}
 		}
 	}

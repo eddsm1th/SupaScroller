@@ -25,13 +25,16 @@ a{
 	}
 }
 
-p + p{
-	margin-top: 1.5rem;
+.text-wrap{
+	* + *{
+		margin-top: 3rem;
+	}
+
+	* + h3{
+		margin-top: 5rem;
+	}	
 }
 
-p + h3{
-	margin-top: 2.5rem;
-}
 
 
 .p{
@@ -154,12 +157,16 @@ p + h3{
 
 .section-wrap{
 	max-width: 1200px;
-	padding: 0 2rem;
+	padding: 0 4rem;
 	margin: 0 auto;
 	display: flex;
 
 	@media(max-width: 1024px){
-		padding: 0 1rem;
+		padding: 0 2rem;
+	}
+
+	&--restricted{
+		max-width: 860px;
 	}
 }
 
