@@ -3,6 +3,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="assets/js/header.js" type="text/javascript"></script>
 	<script src="assets/js/in-view.js" type="text/javascript"></script>
+	<script src="assets/js/nav.js" type="text/javascript"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>SupaScroller</title>
 </head>
@@ -13,7 +14,7 @@
 		<h1>EDDSMITH.COM</h1>
 	</section>
 
-	<section class="nav">
+	<section class="nav nav--black nav--scroll">
 		<h1>Eddsmith.com</h1>
 		<div>
 			<p>About Me</p>
@@ -22,88 +23,103 @@
 		</div>
 	</section>
 
-	<section class="hero-wrapper">
-		<div class="hero">
+	<section class="hero-wrapper">			
 
-			<section class="hero__slide">
-				<div class="background" style="background-image: url('assets/images/sunset.jpg')">
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/sunset.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/sunset.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/sunset.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/sunset.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/sunset.jpg')"></div>
-					</div>
-				</div>
-				<div class="hero-content">
-					<div class="section-wrap">
-						<h1 class="content__title">Hey,<br>it's me</h1>
-						<div class="learn-more">Learn More</div>
-					</div>
+		<div style="position: relative;">
+
+			<section class="nav nav--scroll">
+				<h1>Eddsmith.com</h1>
+				<div>
+					<p>About Me</p>
+					<p>Work</p>
+					<p>Contact</p>
 				</div>
 			</section>
 
-			<section class="hero__slide">
-				<div class="background" style="background-image: url('assets/images/bridge.jpg')">
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/bridge.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/bridge.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/bridge.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/bridge.jpg')"></div>
-					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/bridge.jpg')"></div>
-					</div>
-				</div>
-				<div class="hero-content">
-					<div class="section-wrap">
-						<h1 class="content__title">;)<br>Boi</h1>
-						<div class="learn-more">Learn More</div>
-					</div>
-				</div>
-			</section>
+			<div class="hero">
 
-			<section class="hero__slide">
-				<div class="background" style="background-image: url('assets/images/mountains.jpg')">
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/mountains.jpg')"></div>
+				<section class="hero__slide">
+					<div class="background" style="background-image: url('assets/images/sunset.jpg')">
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/sunset.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/sunset.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/sunset.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/sunset.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/sunset.jpg')"></div>
+						</div>
 					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/mountains.jpg')"></div>
+					<div class="hero-content">
+						<div class="section-wrap">
+							<h1 class="content__title">Hey,<br>it's me</h1>
+							<div class="learn-more">Learn More</div>
+						</div>
 					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/mountains.jpg')"></div>
+				</section>
+
+				<section class="hero__slide">
+					<div class="background" style="background-image: url('assets/images/bridge.jpg')">
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/bridge.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/bridge.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/bridge.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/bridge.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/bridge.jpg')"></div>
+						</div>
 					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/mountains.jpg')"></div>
+					<div class="hero-content">
+						<div class="section-wrap">
+							<h1 class="content__title">;)<br>Boi</h1>
+							<div class="learn-more">Learn More</div>
+						</div>
 					</div>
-					<div class="background__segment">
-						<div style="background-image: url('assets/images/mountains.jpg')"></div>
+				</section>
+
+				<section class="hero__slide">
+					<div class="background" style="background-image: url('assets/images/mountains.jpg')">
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/mountains.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/mountains.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/mountains.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/mountains.jpg')"></div>
+						</div>
+						<div class="background__segment">
+							<div style="background-image: url('assets/images/mountains.jpg')"></div>
+						</div>
 					</div>
-				</div>
-				<div class="hero-content">
-					<div class="section-wrap">
-						<h1 class="content__title">Blip<br>Bloop</h1>
-						<div class="learn-more">Learn More</div>
+					<div class="hero-content">
+						<div class="section-wrap">
+							<h1 class="content__title">Blip<br>Bloop</h1>
+							<div class="learn-more">Learn More</div>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+
+			</div>
 
 		</div>
+
 	</section>
 
 	<section class="content">
@@ -118,6 +134,8 @@
 			<div class="content__body">
 				<div class="section-wrap section-wrap--restricted">
 					<div class="text-wrap">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id consequat tellus. Pellentesque eget turpis sem. Maecenas tempor suscipit ex, eu volutpat risus cursus eget. Mauris elementum laoreet aliquet. Praesent imperdiet mollis libero, gravida dictum felis. In hac habitasse platea dictumst. Nulla interdum lorem non dolor suscipit, vestibulum elementum dolor consequat. Fusce faucibus facilisis elit ut rutrum. Sed placerat arcu sit amet velit vulputate, quis gravida sapien semper.</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id consequat tellus. Pellentesque eget turpis sem. Maecenas tempor suscipit ex, eu volutpat risus cursus eget. Mauris elementum laoreet aliquet. Praesent imperdiet mollis libero, gravida dictum felis. In hac habitasse platea dictumst. Nulla interdum lorem non dolor suscipit, vestibulum elementum dolor consequat. Fusce faucibus facilisis elit ut rutrum. Sed placerat arcu sit amet velit vulputate, quis gravida sapien semper.</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id consequat tellus. Pellentesque eget turpis sem. Maecenas tempor suscipit ex, eu volutpat risus cursus eget. Mauris elementum laoreet aliquet. Praesent imperdiet mollis libero, gravida dictum felis. In hac habitasse platea dictumst. Nulla interdum lorem non dolor suscipit, vestibulum elementum dolor consequat. Fusce faucibus facilisis elit ut rutrum. Sed placerat arcu sit amet velit vulputate, quis gravida sapien semper.</p>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id consequat tellus. Pellentesque eget turpis sem. Maecenas tempor suscipit ex, eu volutpat risus cursus eget. Mauris elementum laoreet aliquet. Praesent imperdiet mollis libero, gravida dictum felis. In hac habitasse platea dictumst. Nulla interdum lorem non dolor suscipit, vestibulum elementum dolor consequat. Fusce faucibus facilisis elit ut rutrum. Sed placerat arcu sit amet velit vulputate, quis gravida sapien semper.</p>
 					</div>

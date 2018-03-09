@@ -3,16 +3,21 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100%;
+	width: 100vw;
 	padding: 1rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
+	&--scroll {
+		position: absolute;
+	}
+
 	h1 {
 		color: #ffffff;
 		text-transform: uppercase;
 		font-weight: 900;
+		font-size: 24px;
 	}
 
 	div {
@@ -22,9 +27,25 @@
 		p {
 			color: #ffffff;
 			padding: 0.5rem;
+			font-weight: 700;
 
 			&:not(:last-child) {
 				margin-right: 1rem;
+			}
+		}
+	}
+
+	&--black {
+		z-index: 1;
+		background: #ffffff;
+
+		h1 {
+			color: #000000;
+		}
+
+		div {
+			p {
+				color: #000000;
 			}
 		}
 	}

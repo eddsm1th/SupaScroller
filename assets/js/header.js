@@ -115,7 +115,6 @@ $(document).ready(function(){
 		})
 
 		$('.content__title').each(function(){
-			console.log('hello there');
 			var slide_index = $(this).parent().parent().parent().index();
 			var multiplier = ( slide_index + 1 ) - currentIndex;
 			var segment_shift = ( $(this).attr('data-max-offset') * multiplier );
@@ -169,7 +168,6 @@ $(document).ready(function(){
 		scrollAmount += e.deltaY;
 
 		if ( $('.hero').hasClass('can-transition') ) {
-			console.log('true');
 			if ( scrollAmount > scrollCompare && currentIndex < $('.hero__slide').length ) {
 				scroll_wheel_shift(1);
 			} else if ( scrollAmount < scrollCompare && currentIndex > 1 ) {
