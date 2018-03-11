@@ -40,7 +40,7 @@ $(document).ready(function(){
 	}
 
 	function text_offsetting(){
-		var side_diff = ( ( ( ( win_width - 1200 ) / 2 ) + 32 ) + ( win_width * 0.035 ) );
+		var side_diff = ( ( ( ( win_width - 1200 ) / 2 ) + 32 ) + ( win_width * 0.05 ) );
 
 		$('.content__title').each(function(){
 			var slide_index = $(this).parent().parent().parent().index();
