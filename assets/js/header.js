@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 	var 	winWidth,
-			shiftValueWinRatio,
+			shiftValueWinRatio = [0, 0, 0, 0, 0],
 			supaScroll = false,
 			startingX,
 			currentIndex = 1,
